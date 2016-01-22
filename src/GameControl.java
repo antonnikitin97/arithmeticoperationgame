@@ -11,6 +11,9 @@ public class GameControl {
     static Integer playerResponse;
     static Player player;
 
+    /**
+     * Enumeration to represent the different arithmetic operations.
+     */
     public enum OPERATION {
         ADD("+"),
         SUBTRACT("-"),
@@ -28,6 +31,18 @@ public class GameControl {
         }
     }
 
+    /**
+     * Sets the response of the player to the class level variable
+     * @param playerResponseParameter
+     */
+    public void setPlayerResponse(Integer playerResponseParameter){
+        playerResponse = playerResponseParameter;
+    }
+
+    /**
+     * The 4 methods below set the value of enumeration
+     * to the given arithmetic operation.
+     */
     public static void setAdd(){
         currentOperation  = OPERATION.ADD;
     }
@@ -67,10 +82,18 @@ public class GameControl {
     }
 
     private static void checkAnswer(){
+        if(playerResponse.equals(answer)) {
+            player.increaseNumberAttempted();
+            player.increaseNumberCorrect();
+            player.increasePlayerPoints();
+            generateOperands();
+        }else{
+            player.increaseNumberAttempted();
+        }
     }
 
     private static void generateOperands(){
-        boolean divisibleByTwo = false;
+        boolean divisibleWholeNumber = false;
         do{
             /**
             Ensures the divisibility of the operands results in a whole number.
@@ -79,9 +102,9 @@ public class GameControl {
             operandOne = Generator.getRandomNumber();
             operandTwo = Generator.getRandomNumber();
             if((operandOne % operandTwo) == 0 && operandTwo != 0){
-                divisibleByTwo = true;
+                divisibleWholeNumber = true;
             }
         }
-        while (!divisibleByTwo);
+        while (!divisibleWholeNumber);
     }
 }
