@@ -9,7 +9,6 @@ public class GameControl {
     static Integer operandTwo;
     static Integer answer = 0;
     static Integer playerResponse;
-    static boolean divideByZeroOccurred = false;
     static Player player;
 
     public enum OPERATION {
@@ -68,9 +67,6 @@ public class GameControl {
     }
 
     private static void checkAnswer(){
-        if(divideByZeroOccurred == true){
-
-        }
     }
 
     private static void generateOperands(){
