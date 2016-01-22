@@ -72,14 +72,16 @@ public class GameControl {
     private static void generateOperands(){
         boolean divisibleByTwo = false;
         do{
-            //Ensures the divisibility of the operands results in a whole number.
+            /**
+            Ensures the divisibility of the operands results in a whole number.
+            Also ensures second operand is never 0 to ensure no division by 0 occurs.
+             **/
             operandOne = Generator.getRandomNumber();
             operandTwo = Generator.getRandomNumber();
-            if((operandOne % operandTwo) == 0){
+            if((operandOne % operandTwo) == 0 && operandTwo != 0){
                 divisibleByTwo = true;
             }
         }
-        //Also ensures second operand is never 0 to ensure no division by 0 occurs.
-        while (!divisibleByTwo && operandTwo == 0);
+        while (!divisibleByTwo);
     }
 }
