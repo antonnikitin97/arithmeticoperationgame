@@ -7,6 +7,12 @@ public class Player {
     private Integer numberAttempted;
     private Integer numberCorrect;
 
+    {
+        numberAttempted = 0;
+        numberCorrect = 0;
+        playerPoints = 0;
+    }
+
     public Player(String playerName){
         this.playerName = playerName;
     }
