@@ -16,5 +16,13 @@ public class MainUserWindow extends JFrame {
         setVisible(true);
         setLayout(new BorderLayout());
         add(userInputPanel, BorderLayout.CENTER);
+
+        userInputPanel.setNameSubmitted(new NameSubmitted() {
+            @Override
+            public void nameSubmit(String playerName) {
+                new MainGameWindow(playerName);
+                setVisible(false);
+            }
+        });
     }
 }
