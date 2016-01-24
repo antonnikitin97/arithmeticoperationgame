@@ -1,3 +1,5 @@
+import sun.rmi.server.InactiveGroupException;
+
 import java.util.Random;
 
 /**
@@ -12,5 +14,8 @@ public class Generator {
 
     public static Integer getRandomNumber(){
         return randomGen.nextInt();
+    }
+    public static Integer getRandomNumber(Integer boundOne){
+        return randomGen.nextInt(boundOne);
     }
 }
