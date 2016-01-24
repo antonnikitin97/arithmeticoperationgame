@@ -28,6 +28,8 @@ public class OperationPanel extends JPanel implements ActionListener {
         GridBagConstraints gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.anchor = gridBagConstraints.LINE_START;
 
+        submit.addActionListener(this);
+
         gridBagConstraints.weighty = 1;
 
         /////////// FIRST COLUMN ///////////
@@ -52,6 +54,6 @@ public class OperationPanel extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        answerListener.answerSubmitted();
+        answerListener.answerSubmitted(Integer.parseInt(answerInput.getText()));
     }
 }
