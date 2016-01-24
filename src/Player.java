@@ -11,7 +11,15 @@ public class Player {
         this.playerName = playerName;
     }
 
-    public void increasePlayerPoints() {
+    public String getPlayerName() {
+        return playerName;
+    }
+
+    public Integer getPlayerPoints(){
+        return playerPoints;
+    }
+
+    public void increasePlayerPoints( ) {
         playerPoints += 2;
     }
 
