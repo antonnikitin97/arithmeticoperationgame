@@ -1,36 +1,46 @@
+import java.util.ArrayList;
+
 /**
  * Created by anton on 21/01/2016.
  */
 public class GameControl {
     private OPERATION currentOperation;
-    Integer operandOne;
-    Integer operandTwo;
-    Integer answer = 0;
-    Integer playerResponse;
-    Player player;
+    private Integer operandOne;
+    private Integer operandTwo;
+    private Integer answer = 0;
+    private Integer playerResponse;
+    private Player player;
+    private TextDisplayPanel textDisplayPanel;
+    private ArrayList<OPERATION> possibleOperations;
 
-    public GameControl(Player player){
+    public GameControl(Player player, TextDisplayPanel textDisplayPanel){
         this.player = player;
+        this.textDisplayPanel = textDisplayPanel;
+        possibleOperations = new ArrayList<>();
+        for(OPERATION o : OPERATION.values()){
+            possibleOperations.add(o);
+        }
+        setUpWindow();
     }
 
     /**
      * Enumeration to represent the different arithmetic operations.
      */
     public enum OPERATION {
-        ADD("+"),
-        SUBTRACT("-"),
-        MULTIPLY("X"),
-        DIVIDE("/");
+        ADD,
+        SUBTRACT,
+        MULTIPLY,
+        DIVIDE;
+    }
 
-        private String operationValue;
+    public Player getPlayer(){
+        return this.player;
+    }
 
-        OPERATION(String value){
-            this.operationValue = value;
-        }
-
-        public String getOperationValue() {
-            return operationValue;
-        }
+    public void setUpWindow(){
+        generateOperands();
+        setCurrentOperation();
+        textDisplayPanel.updateText(operandOne, operandTwo, currentOperation.toString());
     }
 
     /**
@@ -83,12 +93,15 @@ public class GameControl {
         }
     }
 
-    private void checkAnswer(){
+    public void checkAnswer(){
+        performCalculation();
         if(playerResponse.equals(answer)) {
             player.increaseNumberAttempted();
             player.increaseNumberCorrect();
             player.increasePlayerPoints();
             generateOperands();
+            setCurrentOperation();
+            textDisplayPanel.updateText(operandOne, operandTwo, currentOperation.toString());
         }else{
             player.increaseNumberAttempted();
         }
@@ -101,12 +114,16 @@ public class GameControl {
             Ensures the divisibility of the operands results in a whole number.
             Also ensures second operand is never 0 to ensure no division by 0 occurs.
              **/
-            operandOne = Generator.getRandomNumber();
-            operandTwo = Generator.getRandomNumber();
-            if((operandOne % operandTwo) == 0 && operandTwo != 0){
+            operandOne = Generator.getRandomNumber(100);
+            operandTwo = Generator.getRandomNumber(100);
+            if(operandTwo != 0 && (operandOne % operandTwo) == 0){
                 divisibleWholeNumber = true;
             }
         }
         while (!divisibleWholeNumber);
+    }
+
+    private void setCurrentOperation(){
+        currentOperation = possibleOperations.get(Generator.getRandomNumber(possibleOperations.size()));
     }
 }
