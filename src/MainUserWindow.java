@@ -10,7 +10,8 @@ public class MainUserWindow extends JFrame {
 
     public MainUserWindow(){
         super("Create User");
-        setSize(600,500);
+        setSize(225,100);
+        setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
         setLayout(new BorderLayout());
