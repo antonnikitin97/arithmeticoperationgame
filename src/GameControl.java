@@ -1,15 +1,17 @@
-import org.omg.CORBA.TRANSACTION_MODE;
-
 /**
  * Created by anton on 21/01/2016.
  */
 public class GameControl {
-    private static OPERATION currentOperation;
-    static Integer operandOne;
-    static Integer operandTwo;
-    static Integer answer = 0;
-    static Integer playerResponse;
-    static Player player;
+    private OPERATION currentOperation;
+    Integer operandOne;
+    Integer operandTwo;
+    Integer answer = 0;
+    Integer playerResponse;
+    Player player;
+
+    public GameControl(Player player){
+        this.player = player;
+    }
 
     /**
      * Enumeration to represent the different arithmetic operations.
@@ -43,28 +45,28 @@ public class GameControl {
      * The 4 methods below set the value of enumeration
      * to the given arithmetic operation.
      */
-    public static void setAdd(){
+    public void setAdd(){
         currentOperation  = OPERATION.ADD;
     }
 
-    public static void setSubtract(){
+    public void setSubtract(){
         currentOperation = OPERATION.SUBTRACT;
     }
 
-    public static void setMultiply(){
+    public void setMultiply(){
         currentOperation = OPERATION.MULTIPLY;
     }
 
-    public static void setDivide(){
+    public void setDivide(){
         currentOperation = OPERATION.DIVIDE;
     }
 
-    public static void setOperands(Integer firstOperand, Integer secondOperand){
+    public void setOperands(Integer firstOperand, Integer secondOperand){
         operandOne = firstOperand;
         operandTwo = secondOperand;
     }
 
-    private static void performCalculation(){
+    private void performCalculation(){
         switch (currentOperation){
             case ADD:
                 answer = (operandOne + operandTwo);
@@ -81,7 +83,7 @@ public class GameControl {
         }
     }
 
-    private static void checkAnswer(){
+    private void checkAnswer(){
         if(playerResponse.equals(answer)) {
             player.increaseNumberAttempted();
             player.increaseNumberCorrect();
@@ -92,7 +94,7 @@ public class GameControl {
         }
     }
 
-    private static void generateOperands(){
+    private void generateOperands(){
         boolean divisibleWholeNumber = false;
         do{
             /**
