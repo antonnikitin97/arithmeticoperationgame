@@ -13,6 +13,18 @@ public class Player {
         playerPoints = 0;
     }
 
+    public Integer getNumberAttempted() {
+        return numberAttempted;
+    }
+
+    public Integer getNumberCorrect() {
+        return numberCorrect;
+    }
+
+    public float getPercentCorrect(){
+        return ((((float)numberCorrect)/((float)numberAttempted)) * 100);
+    }
+
     public Player(String playerName){
         this.playerName = playerName;
     }
