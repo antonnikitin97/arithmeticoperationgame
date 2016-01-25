@@ -104,6 +104,9 @@ public class GameControl {
             textDisplayPanel.updateText(operandOne, operandTwo, currentOperation.toString());
         }else{
             player.increaseNumberAttempted();
+            generateOperands();
+            setCurrentOperation();
+            textDisplayPanel.updateText(operandOne, operandTwo, currentOperation.toString());
         }
     }
 
