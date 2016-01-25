@@ -26,6 +26,7 @@ public class MainGameWindow extends JFrame {
         add(operationPanel, BorderLayout.SOUTH);
         add(statisticsPanel, BorderLayout.WEST);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setResizable(false);
         setVisible(true);
 
         operationPanel.setAnswerListener(new AnswerListener() {
@@ -33,6 +34,7 @@ public class MainGameWindow extends JFrame {
             public void answerSubmitted(Integer playerAnswer) {
                 gameControl.setPlayerResponse(playerAnswer);
                 gameControl.checkAnswer();
+                statisticsPanel.updateFields(gameControl.getPlayer().getPlayerPoints(), gameControl.getPlayer().getNumberAttempted());
             }
         });
     }
