@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.border.TitledBorder;
 import java.awt.*;
 
 /**
@@ -21,6 +22,7 @@ public class TextDisplayPanel extends JPanel {
         this.gameControl = gc;
         setLayout(new GridBagLayout());
         GridBagConstraints gridBagConstraints = new GridBagConstraints();
+        setBorder(new TitledBorder("Sum will appear here..."));
         gridBagConstraints.weightx = 0;
         gridBagConstraints.weighty = 0;
         //Constrains for the components
