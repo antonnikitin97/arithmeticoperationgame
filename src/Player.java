@@ -37,8 +37,25 @@ public class Player {
         return playerPoints;
     }
 
-    public void increasePlayerPoints( ) {
-        playerPoints += 2;
+    public void increasePlayerPoints(GameControl.OPERATION currentOperation) {
+        switch (currentOperation){
+            case ADD:
+                playerPoints++;
+                break;
+            case SUBTRACT:
+                playerPoints++;
+                break;
+            case MULTIPLY:
+                playerPoints += 2;
+                break;
+            case DIVIDE:
+                playerPoints += 4;
+                break;
+        }
+    }
+
+    public void decreasePlayerPoints(){
+        playerPoints -= 2;
     }
 
     public void increaseNumberAttempted(){

@@ -19,8 +19,8 @@ public class MainGameWindow extends JFrame {
         super();
         textDisplayPanel = new TextDisplayPanel(gameControl);
         this.gameControl = new GameControl(new Player(name), textDisplayPanel);
-        statisticsPanel = new StatisticsPanel(gameControl.getPlayer());
-        this.setTitle("Operation Maths - " + gameControl.getPlayer().getPlayerName());
+        statisticsPanel = new StatisticsPanel(gameControl.getActivePlayer());
+        this.setTitle("Operation Maths - " + gameControl.getActivePlayer().getPlayerName());
         setSize(600,500);
         add(textDisplayPanel, BorderLayout.CENTER);
         add(operationPanel, BorderLayout.SOUTH);
@@ -34,7 +34,7 @@ public class MainGameWindow extends JFrame {
             public void answerSubmitted(Integer playerAnswer) {
                 gameControl.setPlayerResponse(playerAnswer);
                 gameControl.checkAnswer();
-                statisticsPanel.updateFields(gameControl.getPlayer().getPlayerPoints(), gameControl.getPlayer().getNumberAttempted());
+                statisticsPanel.updateFields(gameControl.getActivePlayer().getPlayerPoints(), gameControl.getActivePlayer().getNumberAttempted());
             }
         });
     }

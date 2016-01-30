@@ -12,6 +12,8 @@ public class UserInputPanel extends JPanel implements ActionListener {
     private JLabel nameLabel;
     private JButton submitButton;
     private NameSubmitted listener;
+    private JList<Player> playerJList;
+    private DefaultListModel<Player> playerDefaultListModel;
 
     //Instance initializer
     {
@@ -19,9 +21,13 @@ public class UserInputPanel extends JPanel implements ActionListener {
         nameField = new JTextField(10);
         nameLabel = new JLabel("Enter name: ");
         submitButton = new JButton("Submit");
+        playerJList = new JList<>();
+        playerDefaultListModel = new DefaultListModel<>();
     }
 
     public UserInputPanel(){
+        playerJList.setModel(playerDefaultListModel);
+        playerDefaultListModel.addElement();
         setLayout(new GridBagLayout());
         //Action listener for the button.
         submitButton.addActionListener(this);
@@ -40,8 +46,13 @@ public class UserInputPanel extends JPanel implements ActionListener {
         add(nameField, gridBagConstraints);
 
         //Second Row, First Column
-        gridBagConstraints.weighty = 1;
-        gridBagConstraints.weightx = 1;
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        add(playerJList, gridBagConstraints);
+
+        //Third Row, First Column
+        gridBagConstraints.weighty = 2;
+        gridBagConstraints.weightx = 2;
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         add(submitButton, gridBagConstraints);

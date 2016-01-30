@@ -9,12 +9,12 @@ public class GameControl {
     private Integer operandTwo;
     private Integer answer = 0;
     private Integer playerResponse;
-    private Player player;
+    private Player ActivePlayer;
     private TextDisplayPanel textDisplayPanel;
     private ArrayList<OPERATION> possibleOperations;
 
-    public GameControl(Player player, TextDisplayPanel textDisplayPanel){
-        this.player = player;
+    public GameControl(Player ActivePlayer, TextDisplayPanel textDisplayPanel){
+        this.ActivePlayer = ActivePlayer;
         this.textDisplayPanel = textDisplayPanel;
         possibleOperations = new ArrayList<>();
         for(OPERATION o : OPERATION.values()){
@@ -33,8 +33,8 @@ public class GameControl {
         DIVIDE;
     }
 
-    public Player getPlayer(){
-        return this.player;
+    public Player getActivePlayer(){
+        return this.ActivePlayer;
     }
 
     public void setUpWindow(){
@@ -44,36 +44,11 @@ public class GameControl {
     }
 
     /**
-     * Sets the response of the player to the class level variable
+     * Sets the response of the ActivePlayer to the class level variable
      * @param playerResponseParameter
      */
     public void setPlayerResponse(Integer playerResponseParameter){
         playerResponse = playerResponseParameter;
-    }
-
-    /**
-     * The 4 methods below set the value of enumeration
-     * to the given arithmetic operation.
-     */
-    public void setAdd(){
-        currentOperation  = OPERATION.ADD;
-    }
-
-    public void setSubtract(){
-        currentOperation = OPERATION.SUBTRACT;
-    }
-
-    public void setMultiply(){
-        currentOperation = OPERATION.MULTIPLY;
-    }
-
-    public void setDivide(){
-        currentOperation = OPERATION.DIVIDE;
-    }
-
-    public void setOperands(Integer firstOperand, Integer secondOperand){
-        operandOne = firstOperand;
-        operandTwo = secondOperand;
     }
 
     private void performCalculation(){
@@ -96,17 +71,14 @@ public class GameControl {
     public void checkAnswer(){
         performCalculation();
         if(playerResponse.equals(answer)) {
-            player.increaseNumberAttempted();
-            player.increaseNumberCorrect();
-            player.increasePlayerPoints();
-            generateOperands();
-            setCurrentOperation();
-            textDisplayPanel.updateText(operandOne, operandTwo, currentOperation.toString());
+            ActivePlayer.increaseNumberAttempted();
+            ActivePlayer.increaseNumberCorrect();
+            ActivePlayer.increasePlayerPoints(currentOperation);
+            setUpWindow();
         }else{
-            player.increaseNumberAttempted();
-            generateOperands();
-            setCurrentOperation();
-            textDisplayPanel.updateText(operandOne, operandTwo, currentOperation.toString());
+            ActivePlayer.increaseNumberAttempted();
+            ActivePlayer.decreasePlayerPoints();
+            setUpWindow();
         }
     }
 
@@ -117,8 +89,8 @@ public class GameControl {
             Ensures the divisibility of the operands results in a whole number.
             Also ensures second operand is never 0 to ensure no division by 0 occurs.
              **/
-            operandOne = Generator.getRandomNumber(100);
-            operandTwo = Generator.getRandomNumber(100);
+            operandOne = Generator.getRandomNumber(150);
+            operandTwo = Generator.getRandomNumber(150);
             if(operandTwo != 0 && (operandOne % operandTwo) == 0){
                 divisibleWholeNumber = true;
             }

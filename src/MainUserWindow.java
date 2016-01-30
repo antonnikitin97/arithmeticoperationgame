@@ -6,17 +6,17 @@ public class MainUserWindow extends JFrame {
 
     {
         userInputPanel = new UserInputPanel();
+
     }
 
     public MainUserWindow(){
         super("Create User");
-        setSize(225,100);
+        setSize(245,140);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
         setLayout(new BorderLayout());
         add(userInputPanel, BorderLayout.CENTER);
-
         userInputPanel.setNameSubmitted(new NameSubmitted() {
             @Override
             public void nameSubmit(String playerName) {
