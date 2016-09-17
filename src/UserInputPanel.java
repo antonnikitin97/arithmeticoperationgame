@@ -27,7 +27,7 @@ public class UserInputPanel extends JPanel implements ActionListener {
 
     public UserInputPanel(){
         playerJList.setModel(playerDefaultListModel);
-        playerDefaultListModel.addElement();
+        //playerDefaultListModel.addElement();
         setLayout(new GridBagLayout());
         //Action listener for the button.
         submitButton.addActionListener(this);

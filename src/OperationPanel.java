@@ -53,7 +53,15 @@ public class OperationPanel extends JPanel implements ActionListener {
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-        answerListener.answerSubmitted(Integer.parseInt(answerInput.getText()));
+    public void actionPerformed(ActionEvent actionEvent) {
+        if(answerInput.getText() == null || answerInput.getText().equals("")){
+            answerInput.setText("0");
+        }
+        try{
+            answerListener.answerSubmitted(Integer.parseInt(answerInput.getText()));
+        }
+        catch (NumberFormatException exception){
+            answerInput.setText("INVALID INPUT!");
+        }
     }
 }
